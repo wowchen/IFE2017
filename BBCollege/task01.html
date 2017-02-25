@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>IFE JavaScript Task 01</title>
+	</head>
+
+	<body>
+
+		<label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+		<button id="button">确认填写</button>
+
+		<div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+		<script type="text/javascript">
+			(function() {
+				/*	
+				在注释下方写下代码
+				给按钮button绑定一个点击事件
+				在事件处理函数中
+				获取aqi-input输入的值，并显示在aqi-display中
+				*/
+				var $ = function(id) {
+					return document.getElementById(id);
+				}
+				var handler = function() {
+					//Javascript内置函数parseInt ( String s , [ int radix ] )，用于解析一个字符串，并返回一个整数。
+					var num = parseInt($("aqi-input").value);
+					// num是数字并且介于0和1000之间；isNaN()函数判断是否是数字,返回一个 Boolean值
+					if((!isNaN(num)) && (num >= 0) && (num <= 1000)) {
+						$("aqi-display").innerHTML = num;
+					} else {
+						alert($("aqi-input").value + " 不是有效的AQI数值，请重新输入0-1000的有效整数！")
+					}
+				}
+				$("button").onclick = function() {
+					handler();
+				}
+				// 当“回车”时,触发handler()事件
+				$("aqi-input").onkeyup = function(event) {
+					if(event.keyCode === 13) {
+						handler();
+					}
+				}
+
+			})();
+		</script>
+	</body>
+
+</html>
